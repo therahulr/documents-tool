@@ -1,0 +1,54 @@
+# Default Configuration for Synthetic Document Generator
+# This file contains default settings that can be overridden via CLI
+
+# General Settings
+output:
+  directory: "./output"  # Default output directory
+  filename_pattern: "{doc_type}_{timestamp}_{counter}"  # Pattern for generated filenames
+
+# Document Generation Settings
+generation:
+  random_seed: null  # Set to integer for reproducible generation, null for random
+
+  # Size constraints
+  default_count: 10  # Default number of documents per type
+  max_transactions_per_statement: 40  # Max transactions in statements
+  min_transactions_per_statement: 15  # Min transactions in statements
+
+# Document Type Specific Settings
+documents:
+  bank_statement:
+    num_transactions: null  # null = random between min and max
+    opening_balance: null  # null = random
+
+  credit_card_statement:
+    num_transactions: null
+    previous_balance: null
+
+  terms_conditions:
+    num_sections: null  # null = random between 8 and 12
+
+  payment_advice:
+    num_invoices: null  # null = random between 1 and 5
+
+  notification:
+    notification_type: null  # null = random, or specify type
+
+  email:
+    email_type: null  # null = random, or specify: 'statement', 'payment', 'alert', 'notification'
+
+# Data Generation Settings
+data:
+  locale: "en_US"  # Locale for Faker data generation
+  currency: "USD"  # Currency for amounts
+
+# File Size Estimation Settings
+size_estimation:
+  tolerance: 0.15  # ±15% tolerance for size-based generation
+  max_iterations: 100  # Max iterations when trying to reach target size
+
+# CLI Settings
+cli:
+  show_progress: true  # Show progress bars
+  confirm_before_generation: true  # Ask for confirmation before starting
+  colored_output: true  # Use colored terminal output

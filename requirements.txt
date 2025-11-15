@@ -1,0 +1,26 @@
+# Core Document Generation Libraries
+reportlab>=4.0.0              # PDF generation
+python-docx>=1.0.0            # DOCX (Word) generation
+openpyxl>=3.1.0               # XLSX (Excel) generation
+odfpy>=1.4.1                  # ODT (OpenDocument) generation
+Pillow>=10.0.0                # Image generation (JPEG, PNG)
+
+# Email/MSG Generation
+# Note: MSG format support via custom implementation using olefile
+olefile>=0.46                 # For MSG file structure
+
+# Synthetic Data Generation
+Faker>=20.0.0                 # Realistic synthetic data
+
+# CLI Enhancement
+rich>=13.0.0                  # Beautiful terminal UI, progress bars
+
+# Configuration
+PyYAML>=6.0                   # YAML config file support
+
+# Utilities
+python-dateutil>=2.8.0        # Date manipulation
+
+# Development/Testing (optional)
+pytest>=7.4.0                 # Testing framework
+pytest-cov>=4.1.0             # Coverage reports
