@@ -12,6 +12,11 @@ olefile>=0.46                 # For MSG file structure
 # Synthetic Data Generation
 Faker>=20.0.0                 # Realistic synthetic data
 
+# Data Processing & Visualization
+pandas>=2.0.0                 # Data manipulation and CSV handling
+matplotlib>=3.7.0             # Chart and visualization generation
+numpy>=1.24.0                 # Numerical operations
+
 # CLI Enhancement
 rich>=13.0.0                  # Beautiful terminal UI, progress bars
 
