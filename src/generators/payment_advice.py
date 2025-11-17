@@ -50,8 +50,19 @@ class PaymentAdviceGenerator(BaseDocumentGenerator):
             'Electronic Payment',
         ])
 
-        # Invoice references
-        num_invoices = random.randint(1, 5)
+        # Invoice references based on complexity
+        # Use num_transactions settings to control number of invoices and line items
+        if 'num_transactions_min' in self.config and 'num_transactions_max' in self.config:
+            # Scale down transactions count for invoices (1 invoice ~ 10-20 transactions)
+            num_invoices = random.randint(
+                max(1, self.config['num_transactions_min'] // 10),
+                max(5, self.config['num_transactions_max'] // 10)
+            )
+            max_items_per_invoice = random.randint(5, 15)
+        else:
+            num_invoices = random.randint(1, 5)
+            max_items_per_invoice = 6
+
         invoices = []
 
         for _ in range(num_invoices):
@@ -60,7 +71,7 @@ class PaymentAdviceGenerator(BaseDocumentGenerator):
 
             # Generate line items for this invoice
             line_items = self.data_generator.generate_line_items(
-                num_items=random.randint(1, 6)
+                num_items=random.randint(1, max_items_per_invoice)
             )
 
             subtotal = sum(item['total'] for item in line_items)

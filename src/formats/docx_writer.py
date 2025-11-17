@@ -67,11 +67,11 @@ class DOCXWriter:
         return self.filepath
 
     def _add_watermark_header(self, doc: Document):
-        """Add watermark to document header."""
+        """Add watermark to document header and footer - multiple placements."""
         section = doc.sections[0]
-        header = section.header
 
-        # Add watermark paragraph
+        # 1. Header watermark
+        header = section.header
         watermark = header.paragraphs[0]
         watermark.text = self.watermark_text
         watermark.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -82,9 +82,21 @@ class DOCXWriter:
         run.font.bold = True
         run.font.color.rgb = RGBColor(133, 100, 4)  # Dark brown
 
-        # Add background color effect (by adding a paragraph with shading)
+        # Add background color effect
         watermark.paragraph_format.line_spacing = 1.0
         watermark.paragraph_format.space_after = Pt(6)
+
+        # 2. Footer watermark
+        footer = section.footer
+        footer_para = footer.paragraphs[0]
+        footer_para.text = self.watermark_text
+        footer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+        # Style footer watermark (smaller, grayed out)
+        footer_run = footer_para.runs[0]
+        footer_run.font.size = Pt(8)
+        footer_run.font.color.rgb = RGBColor(128, 128, 128)  # Gray
+        footer_para.paragraph_format.space_before = Pt(6)
 
     def _write_bank_statement(self, doc: Document, content: Dict[str, Any]):
         """Write bank statement to DOCX."""

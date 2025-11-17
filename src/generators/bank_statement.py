@@ -30,8 +30,15 @@ class BankStatementGenerator(StatementGenerator):
         end_date = datetime.now()
         start_date = end_date - timedelta(days=30)
 
-        # Generate transactions
-        num_transactions = self.config.get('num_transactions', random.randint(15, 40))
+        # Generate transactions based on complexity settings
+        if 'num_transactions_min' in self.config and 'num_transactions_max' in self.config:
+            num_transactions = random.randint(
+                self.config['num_transactions_min'],
+                self.config['num_transactions_max']
+            )
+        else:
+            num_transactions = self.config.get('num_transactions', random.randint(15, 40))
+
         opening_balance = self.config.get('opening_balance', random.uniform(500, 10000))
 
         transactions = self.data_generator.generate_bank_transactions(

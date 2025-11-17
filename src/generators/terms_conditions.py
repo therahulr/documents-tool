@@ -32,8 +32,15 @@ class TermsAndConditionsGenerator(BaseDocumentGenerator):
         """
         bank_name = self.data_generator.generate_bank_name()
 
-        # Number of sections
-        num_sections = self.config.get('num_sections', random.randint(8, 12))
+        # Number of sections based on complexity (more sections = longer document)
+        if 'num_pages_min' in self.config and 'num_pages_max' in self.config:
+            # Roughly 1-2 sections per page
+            num_sections = random.randint(
+                self.config['num_pages_min'] * 1,
+                self.config['num_pages_max'] * 2
+            )
+        else:
+            num_sections = self.config.get('num_sections', random.randint(8, 12))
 
         # Generate sections
         sections = DocumentTemplates.generate_terms_and_conditions(

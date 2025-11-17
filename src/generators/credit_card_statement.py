@@ -38,8 +38,15 @@ class CreditCardStatementGenerator(StatementGenerator):
         previous_balance = self.config.get('previous_balance', random.uniform(500, 3000))
         previous_balance = round(previous_balance, 2)
 
-        # Generate purchases
-        num_purchases = self.config.get('num_transactions', random.randint(10, 35))
+        # Generate purchases based on complexity settings
+        if 'num_transactions_min' in self.config and 'num_transactions_max' in self.config:
+            num_purchases = random.randint(
+                self.config['num_transactions_min'],
+                self.config['num_transactions_max']
+            )
+        else:
+            num_purchases = self.config.get('num_transactions', random.randint(10, 35))
+
         purchases = self.data_generator.generate_credit_card_transactions(
             start_date=start_date,
             end_date=end_date,

@@ -91,7 +91,7 @@ class PDFWriter:
 
     def _add_watermark(self, canvas_obj, doc):
         """
-        Add watermark to page.
+        Add watermark to page - multiple placements for professional documents.
 
         Args:
             canvas_obj: ReportLab canvas
@@ -99,7 +99,7 @@ class PDFWriter:
         """
         canvas_obj.saveState()
 
-        # Add watermark banner at top
+        # 1. Top banner watermark
         canvas_obj.setFillColor(colors.Color(1, 0.95, 0.8, alpha=0.9))  # Light yellow
         canvas_obj.rect(0, doc.height + doc.topMargin + 10, doc.width + doc.leftMargin + doc.rightMargin, 30, fill=1, stroke=0)
 
@@ -113,11 +113,31 @@ class PDFWriter:
 
         canvas_obj.drawString(x, y, self.watermark_text)
 
-        # Add page number at bottom
+        # 2. Footer watermark (smaller text)
+        canvas_obj.setFont("Helvetica", 7)
+        canvas_obj.setFillColor(colors.Color(0.5, 0.5, 0.5, alpha=0.6))  # Gray
+        footer_text_width = canvas_obj.stringWidth(self.watermark_text, "Helvetica", 7)
+        footer_x = (doc.width + doc.leftMargin + doc.rightMargin - footer_text_width) / 2
+        canvas_obj.drawString(footer_x, 0.3*inch, self.watermark_text)
+
+        # 3. Diagonal watermark in center (rotated, faint)
+        canvas_obj.setFillColor(colors.Color(0.9, 0.9, 0.9, alpha=0.15))  # Very light gray
+        canvas_obj.setFont("Helvetica-Bold", 48)
+
+        # Rotate and draw diagonal watermark
+        canvas_obj.saveState()
+        canvas_obj.translate(doc.width/2 + doc.leftMargin, doc.height/2 + doc.bottomMargin)
+        canvas_obj.rotate(45)
+        diag_text = "TEST DOCUMENT"
+        diag_width = canvas_obj.stringWidth(diag_text, "Helvetica-Bold", 48)
+        canvas_obj.drawString(-diag_width/2, 0, diag_text)
+        canvas_obj.restoreState()
+
+        # 4. Page number at bottom right
         canvas_obj.setFillColor(colors.black)
         canvas_obj.setFont("Helvetica", 9)
         page_num = f"Page {doc.page}"
-        canvas_obj.drawString(doc.width/2 + doc.leftMargin, 0.5*inch, page_num)
+        canvas_obj.drawString(doc.width - 1*inch, 0.5*inch, page_num)
 
         canvas_obj.restoreState()
 
