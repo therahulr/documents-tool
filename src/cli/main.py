@@ -18,6 +18,7 @@ from src.cli.prompts import DocumentGeneratorPrompts
 from src.generators import get_generator, GENERATOR_NAMES
 from src.formats import get_writer, is_format_supported
 from src.utils.size_estimator import SizeEstimator
+from src.utils.filename_generator import DocumentNameGenerator
 
 
 console = Console()
@@ -104,20 +105,35 @@ class DocumentGeneratorCLI:
             # Step 4: Configure generation (count vs size)
             gen_config = self.prompts.configure_generation()
 
+            # Step 5: Configure document complexity
+            complexity_config = self.prompts.configure_document_complexity(selected_types)
+
             # Build complete configuration
             run_config = {
                 'selected_types': selected_types,
                 'formats': format_selections,
                 'output': output_config,
                 'generation': gen_config,
+                'complexity': complexity_config,
             }
 
-            # Step 5: Show summary and confirm
+            # Merge complexity settings into main config for generators
+            self.config.update({
+                'complexity': complexity_config,
+                'num_pages_min': complexity_config['num_pages_min'],
+                'num_pages_max': complexity_config['num_pages_max'],
+                'num_transactions_min': complexity_config['num_transactions_min'],
+                'num_transactions_max': complexity_config['num_transactions_max'],
+                'num_excel_rows_max': complexity_config['num_excel_rows_max'],
+                'include_charts': complexity_config['include_charts'],
+            })
+
+            # Step 6: Show summary and confirm
             if not self.prompts.show_summary(run_config):
                 console.print("[yellow]Generation cancelled by user.[/yellow]")
                 return
 
-            # Step 6: Generate documents
+            # Step 7: Generate documents
             self.prompts.show_progress_header()
             start_time = time.time()
 
@@ -267,10 +283,14 @@ class DocumentGeneratorCLI:
         generator = get_generator(doc_type, config=self.config, seed=self.config.get('generation', {}).get('random_seed'))
         content = generator.generate_content()
 
-        # Create filename
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        filename = f"{doc_type}_{timestamp}_{counter:04d}.{fmt}"
+        # Create realistic filename
+        filename = DocumentNameGenerator.generate_filename(doc_type, fmt)
         filepath = output_dir / filename
+
+        # Ensure uniqueness by appending counter if file exists
+        if filepath.exists():
+            base_name = filepath.stem
+            filepath = output_dir / f"{base_name}_{counter:03d}.{fmt}"
 
         # Write document
         writer = get_writer(str(filepath))
