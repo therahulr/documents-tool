@@ -6,7 +6,7 @@ NO LOREM IPSUM - all content is meaningful and realistic.
 """
 
 import random
-from typing import List
+from typing import List, Dict
 
 
 class DocumentTemplates:
