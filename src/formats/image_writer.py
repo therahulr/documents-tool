@@ -8,8 +8,8 @@ from typing import Dict, Any
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
 
-from ..utils.watermark import get_watermark_text
-from ..utils.formatting import format_currency, format_date, format_account_number, format_card_number
+from src.utils.watermark import get_watermark_text
+from src.utils.formatting import format_currency, format_date, format_account_number, format_card_number
 
 
 class ImageWriter:

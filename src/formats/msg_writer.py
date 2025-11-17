@@ -12,7 +12,7 @@ from datetime import datetime
 from typing import Dict, Any
 import os
 
-from ..utils.watermark import get_watermark_html
+from src.utils.watermark import get_watermark_html
 
 
 class EMLWriter:

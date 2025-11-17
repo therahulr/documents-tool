@@ -11,8 +11,8 @@ from rich.table import Table
 from rich.panel import Panel
 from rich import print as rprint
 
-from ..generators import GENERATOR_NAMES
-from ..formats import DOCUMENT_FORMAT_SUPPORT
+from src.generators import GENERATOR_NAMES
+from src.formats import DOCUMENT_FORMAT_SUPPORT
 
 
 console = Console()

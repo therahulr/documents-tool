@@ -8,8 +8,8 @@ for payment processing and banking services.
 import random
 from datetime import datetime
 from typing import Dict, Any
-from .base import BaseDocumentGenerator
-from ..data.templates import DocumentTemplates
+from src.generators.base import BaseDocumentGenerator
+from src.data.templates import DocumentTemplates
 
 
 class TermsAndConditionsGenerator(BaseDocumentGenerator):

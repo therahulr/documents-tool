@@ -10,8 +10,8 @@ from docx import Document
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
-from ..utils.watermark import get_watermark_text
-from ..utils.formatting import (
+from src.utils.watermark import get_watermark_text
+from src.utils.formatting import (
     format_currency, format_date, format_date_long,
     format_card_number, format_account_number
 )

@@ -8,9 +8,9 @@ suitable for MSG or EML format output.
 import random
 from datetime import datetime, timedelta
 from typing import Dict, Any, List
-from .base import EmailGenerator as BaseEmailGenerator
-from ..data.templates import DocumentTemplates
-from ..utils.formatting import format_currency, format_date
+from src.generators.base import EmailGenerator as BaseEmailGenerator
+from src.data.templates import DocumentTemplates
+from src.utils.formatting import format_currency, format_date
 
 
 class EmailGenerator(BaseEmailGenerator):

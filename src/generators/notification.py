@@ -7,9 +7,9 @@ Generates various types of banking notifications, alerts, and letters.
 import random
 from datetime import datetime, timedelta
 from typing import Dict, Any
-from .base import LetterGenerator
-from ..data.templates import DocumentTemplates
-from ..utils.formatting import format_currency, format_date
+from src.generators.base import LetterGenerator
+from src.data.templates import DocumentTemplates
+from src.utils.formatting import format_currency, format_date
 
 
 class NotificationGenerator(LetterGenerator):

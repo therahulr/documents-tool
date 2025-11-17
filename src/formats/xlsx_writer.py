@@ -10,8 +10,8 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.utils import get_column_letter
 
-from ..utils.watermark import get_watermark_text
-from ..utils.formatting import format_currency, format_date
+from src.utils.watermark import get_watermark_text
+from src.utils.formatting import format_currency, format_date
 
 
 class XLSXWriter:

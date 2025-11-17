@@ -2,6 +2,6 @@
 CLI module for interactive document generation.
 """
 
-from .main import DocumentGeneratorCLI, main
+from src.cli.main import DocumentGeneratorCLI, main
 
 __all__ = ['DocumentGeneratorCLI', 'main']

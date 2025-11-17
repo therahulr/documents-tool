@@ -8,7 +8,7 @@ invoice references, and line item breakdowns.
 import random
 from datetime import datetime, timedelta
 from typing import Dict, Any
-from .base import BaseDocumentGenerator
+from src.generators.base import BaseDocumentGenerator
 
 
 class PaymentAdviceGenerator(BaseDocumentGenerator):

@@ -8,7 +8,7 @@ must inherit from, ensuring consistent interface and functionality.
 from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import Dict, Any, List
-from ..data.synthetic import SyntheticDataGenerator
+from src.data.synthetic import SyntheticDataGenerator
 
 
 class BaseDocumentGenerator(ABC):

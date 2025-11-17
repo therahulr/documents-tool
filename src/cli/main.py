@@ -14,10 +14,10 @@ import yaml
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
 
-from .prompts import DocumentGeneratorPrompts
-from ..generators import get_generator, GENERATOR_NAMES
-from ..formats import get_writer, is_format_supported
-from ..utils.size_estimator import SizeEstimator
+from src.cli.prompts import DocumentGeneratorPrompts
+from src.generators import get_generator, GENERATOR_NAMES
+from src.formats import get_writer, is_format_supported
+from src.utils.size_estimator import SizeEstimator
 
 
 console = Console()

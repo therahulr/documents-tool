@@ -8,7 +8,7 @@ interest charges, and summary information.
 import random
 from datetime import datetime, timedelta
 from typing import Dict, Any
-from .base import StatementGenerator
+from src.generators.base import StatementGenerator
 
 
 class CreditCardStatementGenerator(StatementGenerator):

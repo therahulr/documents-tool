@@ -4,12 +4,12 @@ Document generators module.
 This module contains all document type generators.
 """
 
-from .bank_statement import BankStatementGenerator
-from .credit_card_statement import CreditCardStatementGenerator
-from .terms_conditions import TermsAndConditionsGenerator
-from .notification import NotificationGenerator
-from .payment_advice import PaymentAdviceGenerator
-from .email import EmailGenerator
+from src.generators.bank_statement import BankStatementGenerator
+from src.generators.credit_card_statement import CreditCardStatementGenerator
+from src.generators.terms_conditions import TermsAndConditionsGenerator
+from src.generators.notification import NotificationGenerator
+from src.generators.payment_advice import PaymentAdviceGenerator
+from src.generators.email import EmailGenerator
 
 # Generator registry for easy lookup
 GENERATOR_REGISTRY = {

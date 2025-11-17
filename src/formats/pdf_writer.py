@@ -16,8 +16,8 @@ from reportlab.platypus import (
 )
 from reportlab.pdfgen import canvas
 
-from ..utils.watermark import get_watermark_text
-from ..utils.formatting import (
+from src.utils.watermark import get_watermark_text
+from src.utils.formatting import (
     format_currency, format_date, format_date_long,
     format_card_number, format_account_number, format_address_block
 )
